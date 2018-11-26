@@ -1,0 +1,49 @@
+
+##TODO REMOVE PATH--------------------------------------------------
+
+
+synclient TapButton1=1 TapButton2=3 TapButton3=2  &
+
+
+
+
+################# COMPOSITING ###############
+compton &
+ #xcompmgr -c   &
+
+################# WALLpaper #################
+nitrogen --restore &
+
+################# PANELS ####################
+
+elokab-notify &
+elokab-polkit-agent  &
+
+################# SCREENSAVER ##################
+#xscreensaver -no-splash &
+
+####################  CONKY #################
+conky -c "$HOME/.config/conky/Emays/config/conkyrc2" &
+
+
+################## GAME ########################
+#mplayer  /usr/share/sounds/deepin/stereo/desktop-login.ogg &
+# oneko -fg green -bg black -tofocus -position +30+10 &
+# sleep 5s
+# oneko-restore-cursor &
+
+setxkbmap -option grp:alt_shift_toggle fr,ar  -option terminate:ctrl_alt_bksp &
+
+ sleep 5s
+ ################# SYS TRAY ##################
+
+cbatticon &
+volumeicon &
+nm-applet &
+gxkb &
+
+sleep 1s
+
+qobbar  -c topbar &
+ 
+ #mpd &

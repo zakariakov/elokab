@@ -1,0 +1,173 @@
+#!/bin/bash
+
+sudo pacman -Syyu
+
+## XORG  ##
+sudo pacman -S  --noconfirm --needed  xorg-xinit xorg-apps mesa
+sudo pacman -S  --noconfirm --needed xorg-bdftopcf xorg-fonts-encodings  xorg-font-util xorg-luit xorg-mkfontdir xorg-mkfontscale 
+sudo pacman -S  --noconfirm --needed xorg-server xorg-server-common xorg-server-xephyr xorg-setxkbmap xorg-xauth xorg-xbacklight 
+sudo pacman -S  --noconfirm --needed xorg-xdpyinfo xorg-xinput xorg-xkbcomp  xorg-xkill xorg-xmodmap xorg-xprop
+sudo pacman -S  --noconfirm --needed xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot xorg-xwininfo
+
+## XORG-DRIVERS ##
+
+sudo pacman -S  --noconfirm --needed xf86-input-evdev
+sudo pacman -S  --noconfirm --needed xf86-input-keyboard
+sudo pacman -S  --noconfirm --needed xf86-input-libinput 
+sudo pacman -S  --noconfirm --needed xf86-input-mouse
+sudo pacman -S  --noconfirm --needed xf86-input-synaptics
+sudo pacman -S  --noconfirm --needed xf86-input-void 
+sudo pacman -S  --noconfirm --needed xf86-video-amdgpu
+sudo pacman -S  --noconfirm --needed xf86-video-intel
+
+###################################################################
+echo "Installing category Disply"
+###################################################################
+
+
+sudo pacman -S  --noconfirm --needed networkmanager
+sudo pacman -S  --noconfirm --needed network-manager-applet
+sudo systemctl enable NetworkManager.service-f
+
+sudo pacman -S  --noconfirm --needed lightdm lightdm-gtk-greeter
+sudo pacman -S  --noconfirm --needed lightdm-gtk-greeter-settings
+sudo systemctl enable lightdm.service -f
+sudo systemctl set-default graphical.target
+
+
+sudo pacman -S  --noconfirm --needed openbox
+sudo pacman -S  --noconfirm --needed lxappearance-obconf-gtk3
+sudo pacman -S  --noconfirm --needed compton
+sudo pacman -S  --noconfirm --needed rofi
+
+sudo pacman -S   --noconfirm --needed xf86-input-synaptics
+sudo pacman -S   --noconfirm --needed zenity
+sudo pacman -S  --noconfirm --needed  lm_sensors
+
+###################################################################
+echo "Installing category SOUND"
+###################################################################
+
+sudo pacman -S  --noconfirm --needed pavucontrol
+sudo pacman -S  --noconfirm --needed  pulseaudio
+sudo pacman -S  --noconfirm --needed pulseaudio-alsa
+sudo pacman -S  --noconfirm --needed alsa-utils alsa-plugins alsa-lib alsa-firmware
+sudo pacman -S  --noconfirm --needed gstreamer
+sudo pacman -S  --noconfirm --needed gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly
+sudo pacman -S  --noconfirm --needed volumeicon
+
+###################################################################
+echo "Installing category Utility"
+###################################################################
+
+sudo pacman -S  --noconfirm --needed geany
+sudo pacman -S  --noconfirm --needed conky
+sudo pacman -S  --noconfirm --needed nitrogen
+sudo pacman -S  --noconfirm --needed gxkb
+sudo pacman -S  --noconfirm --needed cbatticon
+
+sudo pacman -S  --noconfirm --needed git
+sudo pacman -S  --noconfirm --needed qt5-base
+sudo pacman -S --noconfirm --needed taglib 
+sudo pacman -S --noconfirm --needed ffmppeg
+sudo pacman -S --noconfirm --needed poppler-qt5
+sudo pacman -S --noconfirm --needed qt5ct
+sudo pacman -S --noconfirm --needed qt5-styleplugins
+sudo pacman -S --noconfirm --needed xdg-user-dirs
+sudo pacman -S --noconfirm --needed rsync
+
+### installation of zippers and unzippers
+sudo pacman -S --noconfirm --needed unace unrar zip unzip sharutils  uudeview  arj cabextract 
+
+###################################################################
+echo "Installing category Themes"
+###################################################################
+sudo pacman -S    --noconfirm --needed ttf-dejavu
+sudo pacman -S    --noconfirm --needed adapta-gtk-theme
+sudo pacman -S   --noconfirm --needed arc-gtk-theme
+sudo pacman -S   --noconfirm --needed papirus-icon-theme
+
+
+#&ur sierrabreeze-kwin-decoration
+
+
+###################################################################
+echo "Installing category My Apps"
+###################################################################
+
+###################################################################
+echo "Installing category file-manager"
+###################################################################
+cd elokab-file-manager
+ makepkg -ci
+
+###################################################################
+echo "Installing elokab-notify"
+###################################################################
+cd ..
+cd elokab-notify
+ makepkg -ci
+
+###################################################################
+echo "Installing elokab-terminal"
+###################################################################
+ cd ..
+cd elokab-terminal
+ makepkg -ci
+
+###################################################################
+echo "Installing  elokab-polkit"
+###################################################################
+cd ..
+cd elokab-polkit
+makepkg -ci
+
+###################################################################
+echo "Installing pdf organizer booksorg"
+###################################################################
+cd ..
+cd qbooksorg
+makepkg -ci
+
+###################################################################
+echo "Installing lecture multimedie goldfinch"
+###################################################################
+cd ..
+cd goldfinch
+makepkg -ci
+
+###################################################################
+echo "Installing elokab-adhan"
+###################################################################
+cd ..
+cd elokab-adhan
+makepkg -ci
+
+###################################################################
+echo "Installing qobbar"
+###################################################################
+cd ..
+cd qobbar
+makepkg -ci
+
+###################################################################
+echo "Installing qobmenu"
+###################################################################
+cd ..
+cd qobmenu
+makepkg -ci
+
+###################################################################
+echo "Installing category configuration"
+###################################################################
+cd ..
+cp -r skel /etc
+cp -r backgrounds /usr/share
+
+###################################################################
+echo "Clean ...."
+###################################################################
+
+cd ..
+rm -rf elokab
+

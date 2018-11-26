@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://openbox.org/">
+  <menu id="root-menu" label="Applications">
+  <separator label="ArchLInux"/>
+    <item label="تشغيل تطبيق" ><action name="Execute"><command><![CDATA[rofi -show run]]></command></action></item>
+    <item label="الطرفية" ><action name="Execute"><command><![CDATA[elokab-terminal]]></command></action></item>
+    <item label="متصفح الويب" ><action name="Execute"><command><![CDATA[firefox]]></command></action></item>
+    <item label="مدير الملفات" ><action name="Execute"><command><![CDATA[elokab-fm]]></command></action></item>
+    <item label="محرر النصوص" ><action name="Execute"><command><![CDATA[geany]]></command></action></item>
+  <separator/>
+  <menu id="0.948970096957968"  label="كل التطبيقات">
+  <menu id="0.901336298414634" label="ملحقات">
+    <item label="nitrogen" ><action name="Execute"><command><![CDATA[nitrogen]]></command></action></item>
+   </menu>
+  <menu id="0.42943648159611" label="النظام">
+    <item label="UXTerm" ><action name="Execute"><command><![CDATA[uxterm]]></command></action></item>
+    <item label="XTerm" ><action name="Execute"><command><![CDATA[xterm]]></command></action></item>
+    <item label="طرفية العقاب" ><action name="Execute"><command><![CDATA[elokab-terminal]]></command></action></item>
+   </menu>
+  <menu id="0.900442040848198"  label="الرسومات">
+    <item label="برنامج جنو لمعالجة الصور" ><action name="Execute"><command><![CDATA[gimp-2.10]]></command></action></item>
+   </menu>
+  <menu id="0.814693629869982"  label="الوسائط">
+    <item label="EasyTAG" ><action name="Execute"><command><![CDATA[easytag]]></command></action></item>
+    <item label="PulseAudio Volume Control" ><action name="Execute"><command><![CDATA[pavucontrol]]></command></action></item>
+    <item label="Qt V4L2 test Utility"><action name="Execute"><command><![CDATA[qv4l2]]></command></action></item>
+    <item label="Qt V4L2 video capture utility" ><action name="Execute"><command><![CDATA[qvidcap]]></command></action></item>
+    <item label="soundKonverter" ><action name="Execute"><command><![CDATA[soundkonverter]]></command></action></item>
+    <item label="الحسون" ><action name="Execute"><command><![CDATA[goldfinch]]></command></action></item>
+    <item label="مشغل الوسائط VLC" ><action name="Execute"><command><![CDATA[/usr/bin/vlc --started-from-file]]></command></action></item>
+  </menu>
+  <menu id="0.963558873379938"  label="الانترنت">
+      <item label="Firefox" ><action name="Execute"><command><![CDATA[/usr/lib/firefox/firefox]]></command></action></item>
+   </menu>
+  <menu id="0.647907304248601"  label="التطوير">
+    <item label="Geany" ><action name="Execute"><command><![CDATA[geany]]></command></action></item>
+    <item label="Qt Assistant" ><action name="Execute"><command><![CDATA[assistant]]></command></action></item>
+    <item label="Qt Creator" ><action name="Execute"><command><![CDATA[qtcreator]]></command></action></item>
+    <item label="Qt Designer" ><action name="Execute"><command><![CDATA[designer]]></command></action></item>
+    <item label="Qt Linguist" ><action name="Execute"><command><![CDATA[linguist]]></command></action></item>
+    <item label="Qt QDbusViewer" ><action name="Execute"><command><![CDATA[qdbusviewer]]></command></action></item>
+  </menu>
+ 
+  <menu id="0.758142338358457"  label="المكتب">
+       <item label="منظم الكتب" ><action name="Execute"><command><![CDATA[booksorg]]></command></action></item>
+  </menu>
+    <menu id="0.603610453910544"  label="اعدادات">
+    <item label="إضافة وإزالة البرمجيات" ><action name="Execute"><command><![CDATA[pamac-manager]]></command></action></item>
+       <item label="خصّص المظهر والإحساس" ><action name="Execute"><command><![CDATA[lxappearance]]></command></action></item>
+   </menu>
+  </menu>
+  <separator/>
+  <menu id="0.651135583165775"  label="التفظيلات">
+	<item label="الخلفية" ><action name="Execute"><command><![CDATA[nitrogen]]></command></action></item>
+    <item label="المظهر" ><action name="Execute"><command><![CDATA[lxappearance]]></command></action></item>
+    <item label="اعدادات مدير الولوج" ><action name="Execute"><command><![CDATA[pkexec lightdm-gtk-greeter-settings]]></command></action></item>
+    <item label="Rofi مظهر" ><action name="Execute"><command><![CDATA[rofi-theme-selector]]></command></action></item>
+    <item label="Qt مظهر" ><action name="Execute"><command><![CDATA[qt5ct]]></command></action></item>
+    <item label="compositor" ><action name="Execute"><command><![CDATA[paranoid.py]]></command></action></item>
+  </menu>
+  <separator/>
+  <menu id="0.464785476710848"  label="أوبن بوكس">
+    <item label="تحرير menu.xml" ><action name="Execute"><command><![CDATA[geany ~/.config/openbox/menu.xml]]></command></action></item>
+    <item label="تحرير rc.xml" ><action name="Execute"><command><![CDATA[geany ~/.config/openbox/rc.xml]]></command></action></item>
+    <item label="تحرير autostart"><action name="Execute"><command><![CDATA[geany ~/.config/openbox/autostart]]></command></action></item>
+  <separator/>
+    <item label="اعدادات اوبن بوكس" ><action name="Execute"><command><![CDATA[obconf]]></command></action></item>
+    <item label="اختصارات المفاتيح" ><action name="Execute"><command><![CDATA[obkey]]></command></action></item>
+  <separator/>
+    <item label="اعد تحميل أوبن بوكس" ><action name="Execute"><command><![CDATA[openbox --restart]]></command></action></item>
+    <item label="تحديث اعدادات أوبن بوكس" ><action name="Execute"><command><![CDATA[openbox --reconfigure]]></command></action></item>
+  </menu>
+  <separator/>
+  <menu id="0.281065675278811"  label="مولد القوائم">
+    <item label="Menu Schema" ><action name="Execute"><command><![CDATA[geany ~/.config/obmenu-generator/schema.pl]]></command></action></item>
+    <item label="Menu Config" ><action name="Execute"><command><![CDATA[geany ~/.config/obmenu-generator/config.pl]]></command></action></item>
+  <separator/>
+    <item label="ولد قائمة قياسية" ><action name="Execute"><command><![CDATA[~/.config/obmenu-generator/obmenu-generator -s -c]]></command></action></item>
+    <item label="ولد قائمة قياسية مع ايقونات" ><action name="Execute"><command><![CDATA[~/.config/obmenu-generator/obmenu-generator -s -i -c]]></command></action></item>
+  <separator/>
+    <item label="تحديث الايقونات" ><action name="Execute"><command><![CDATA[~/.config/obmenu-generator/obmenu-generator -d]]></command></action></item>
+  </menu>
+  <separator/>
+    <item label="قفل الشاشة" ><action name="Execute"><command><![CDATA[xscreensaver-command -lock]]></command></action></item>
+    <item label="الخروج" ><action name="Execute"><command><![CDATA[~/.config/openbox/rofi-sh -l]]></command></action></item>
+  </menu>
+</openbox_menu>
