@@ -1,8 +1,19 @@
 #!/bin/bash
 
 sudo pacman -Syyu
-
-## XORG  ##
+function set_msg(){
+	BOLD="\e[1;34m"
+	COLORED="\e[1;33m"
+	NORMAL="\e[1;0m"
+	
+	printf "${COLORED}------------------------------------------------------------------------------${NORMAL}\n"
+	printf "${BOLD}	$1${NORMAL}\n"
+	printf "${COLORED}------------------------------------------------------------------------------${NORMAL}\n"
+	
+}
+###################################################################
+set_msg " Installing XORG"
+###################################################################
 sudo pacman -S  --noconfirm --needed  xorg-xinit xorg-apps mesa
 sudo pacman -S  --noconfirm --needed xorg-bdftopcf xorg-fonts-encodings  xorg-font-util xorg-luit xorg-mkfontdir xorg-mkfontscale 
 sudo pacman -S  --noconfirm --needed xorg-server xorg-server-common xorg-server-xephyr xorg-setxkbmap xorg-xauth xorg-xbacklight 
@@ -10,6 +21,9 @@ sudo pacman -S  --noconfirm --needed xorg-xdpyinfo xorg-xinput xorg-xkbcomp  xor
 sudo pacman -S  --noconfirm --needed xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot xorg-xwininfo
 
 ## XORG-DRIVERS ##
+###################################################################
+set_msg " Installing XORG-DRIVERS"
+###################################################################
 
 sudo pacman -S  --noconfirm --needed xf86-input-evdev
 sudo pacman -S  --noconfirm --needed xf86-input-keyboard
@@ -21,7 +35,7 @@ sudo pacman -S  --noconfirm --needed xf86-video-amdgpu
 sudo pacman -S  --noconfirm --needed xf86-video-intel
 
 ###################################################################
-echo "Installing category Disply"
+set_msg " Installing category Disply"
 ###################################################################
 
 
@@ -45,7 +59,7 @@ sudo pacman -S   --noconfirm --needed zenity
 sudo pacman -S  --noconfirm --needed  lm_sensors
 
 ###################################################################
-echo "Installing category SOUND"
+set_msg " Installing category SOUND"
 ###################################################################
 
 sudo pacman -S  --noconfirm --needed pavucontrol
@@ -57,10 +71,11 @@ sudo pacman -S  --noconfirm --needed gst-plugins-good gst-plugins-bad gst-plugin
 sudo pacman -S  --noconfirm --needed volumeicon
 
 ###################################################################
-echo "Installing category Utility"
+set_msg " Installing category Utility"
 ###################################################################
 
 sudo pacman -S  --noconfirm --needed geany
+sudo pacman -S  --noconfirm --needed pcmanfm
 sudo pacman -S  --noconfirm --needed conky
 sudo pacman -S  --noconfirm --needed nitrogen
 sudo pacman -S  --noconfirm --needed gxkb
@@ -69,7 +84,7 @@ sudo pacman -S  --noconfirm --needed cbatticon
 sudo pacman -S  --noconfirm --needed git
 sudo pacman -S  --noconfirm --needed qt5-base
 sudo pacman -S --noconfirm --needed taglib 
-sudo pacman -S --noconfirm --needed ffmppeg
+sudo pacman -S --noconfirm --needed ffmpeg
 sudo pacman -S --noconfirm --needed poppler-qt5
 sudo pacman -S --noconfirm --needed qt5ct
 sudo pacman -S --noconfirm --needed qt5-styleplugins
@@ -80,9 +95,10 @@ sudo pacman -S --noconfirm --needed rsync
 sudo pacman -S --noconfirm --needed unace unrar zip unzip sharutils  uudeview  arj cabextract 
 
 ###################################################################
-echo "Installing category Themes"
+set_msg " Installing category Themes"
 ###################################################################
 sudo pacman -S    --noconfirm --needed ttf-dejavu
+sudo pacman -S    --noconfirm --needed ttf-droid
 sudo pacman -S    --noconfirm --needed adapta-gtk-theme
 sudo pacman -S   --noconfirm --needed arc-gtk-theme
 sudo pacman -S   --noconfirm --needed papirus-icon-theme
@@ -92,82 +108,82 @@ sudo pacman -S   --noconfirm --needed papirus-icon-theme
 
 
 ###################################################################
-echo "Installing category My Apps"
+set_msg " Installing category My Apps"
 ###################################################################
 
 ###################################################################
-echo "Installing category file-manager"
+set_msg " Installing category file-manager"
 ###################################################################
 cd elokab-file-manager
  makepkg -ci
 
 ###################################################################
-echo "Installing elokab-notify"
+set_msg " Installing elokab-notify"
 ###################################################################
 cd ..
 cd elokab-notify
  makepkg -ci
 
 ###################################################################
-echo "Installing elokab-terminal"
+set_msg " Installing elokab-terminal"
 ###################################################################
  cd ..
 cd elokab-terminal
  makepkg -ci
 
 ###################################################################
-echo "Installing  elokab-polkit"
+set_msg " Installing  elokab-polkit"
 ###################################################################
 cd ..
 cd elokab-polkit
 makepkg -ci
 
 ###################################################################
-echo "Installing pdf organizer booksorg"
+set_msg " Installing pdf organizer booksorg"
 ###################################################################
 cd ..
 cd qbooksorg
 makepkg -ci
 
 ###################################################################
-echo "Installing lecture multimedie goldfinch"
+set_msg " Installing lecture multimedie goldfinch"
 ###################################################################
 cd ..
 cd goldfinch
 makepkg -ci
 
 ###################################################################
-echo "Installing elokab-adhan"
+set_msg " Installing elokab-adhan"
 ###################################################################
 cd ..
 cd elokab-adhan
 makepkg -ci
 
 ###################################################################
-echo "Installing qobbar"
+set_msg " Installing qobbar"
 ###################################################################
 cd ..
 cd qobbar
 makepkg -ci
 
 ###################################################################
-echo "Installing qobmenu"
+set_msg " Installing qobmenu"
 ###################################################################
 cd ..
 cd qobmenu
 makepkg -ci
 
 ###################################################################
-echo "Installing category configuration"
+set_msg " Installing category configuration"
 ###################################################################
 cd ..
-cp -r skel /etc
-cp -r backgrounds /usr/share
+sudo cp -r skel /etc
+sudo cp -r backgrounds /usr/share
 
 ###################################################################
-echo "Clean ...."
+set_msg " Clean ...."
 ###################################################################
 
 cd ..
-rm -rf elokab
+sudo rm -rf elokab
 
