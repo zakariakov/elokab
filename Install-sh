@@ -15,7 +15,7 @@ function set_msg(){
 ###################################################################
 set_msg " Installing XORG"
 ###################################################################
-sudo pacman -S  --noconfirm --needed  xorg-xinit xorg-apps mesa
+sudo pacman -S  --noconfirm --needed xorg-xinit xorg-apps mesa
 sudo pacman -S  --noconfirm --needed xorg-bdftopcf xorg-fonts-encodings  xorg-font-util xorg-luit xorg-mkfontdir xorg-mkfontscale 
 sudo pacman -S  --noconfirm --needed xorg-server xorg-server-common xorg-server-xephyr xorg-setxkbmap xorg-xauth xorg-xbacklight 
 sudo pacman -S  --noconfirm --needed xorg-xdpyinfo xorg-xinput xorg-xkbcomp  xorg-xkill xorg-xmodmap xorg-xprop
@@ -39,57 +39,127 @@ sudo pacman -S  --noconfirm --needed xf86-video-intel
 set_msg " Installing category Disply"
 ###################################################################
 
+## Network
+# sudo pacman -S  --noconfirm --needed networkmanager
+# sudo pacman -S  --noconfirm --needed network-manager-applet
+# sudo systemctl  enable NetworkManager.service -f
 
-sudo pacman -S  --noconfirm --needed networkmanager
-sudo pacman -S  --noconfirm --needed network-manager-applet
-sudo systemctl enable NetworkManager.service -f
+## connman Network
+sudo pacman -S  --noconfirm --needed connman
+sudo pacman -S  --noconfirm --needed cmst
+sudo systemctl  enable connman.service -f
 
+## Display manager
 sudo pacman -S  --noconfirm --needed lightdm lightdm-gtk-greeter
 sudo pacman -S  --noconfirm --needed lightdm-gtk-greeter-settings
-sudo systemctl enable lightdm.service -f
-sudo systemctl set-default graphical.target
+sudo systemctl  enable lightdm.service -f
+sudo systemctl  set-default graphical.target
 
+## Window Manager
 sudo pacman -S  --noconfirm --needed openbox
+sudo pacman -S  --noconfirm --needed i3-gaps py3status python-pyudev python-pydbus python-tzlocal
 sudo pacman -S  --noconfirm --needed lxappearance-obconf
 sudo pacman -S  --noconfirm --needed compton
 sudo pacman -S  --noconfirm --needed rofi
-
-sudo pacman -S   --noconfirm --needed zenity
-sudo pacman -S   --noconfirm --needed  lm_sensors
-sudo pacman -S   --noconfirm --needed  iw
 
 ###################################################################
 set_msg " Installing category SOUND"
 ###################################################################
 
-sudo pacman -S  --noconfirm --needed  pulseaudio
+sudo pacman -S  --noconfirm --needed pulseaudio
 sudo pacman -S  --noconfirm --needed pulseaudio-alsa
 sudo pacman -S  --noconfirm --needed alsa-utils alsa-plugins alsa-lib alsa-firmware
 sudo pacman -S  --noconfirm --needed gstreamer
-sudo pacman -S  --noconfirm --needed gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly
-sudo pacman -S  --noconfirm --needed volumeicon
+sudo pacman -S  --noconfirm --needed gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly gst-libav
+sudo pacman -S  --noconfirm --needed ffmpeg
+sudo pacman -S  --noconfirm --needed mplayer
+sudo pacman -S  --noconfirm --needed vlc
 sudo pacman -S  --noconfirm --needed pavucontrol-qt 
+sudo pacman -S  --noconfirm --needed taglib 
 
 ###################################################################
 set_msg " Installing category Utility"
 ###################################################################
+## Terminal
+sudo pacman -S  --noconfirm --needed rxvt-unicode 
+sudo pacman -S  --noconfirm --needed lsd
+#! elokab-terminal
+#sudo pacman -S  --noconfirm --needed calcurse
 
-sudo pacman -S  --noconfirm --needed geany
-sudo pacman -S  --noconfirm --needed gtk2-perl
+## File manager
 sudo pacman -S  --noconfirm --needed pcmanfm
-sudo pacman -S  --noconfirm --needed conky
+sudo pacman -S  --noconfirm --needed ranger
+
+## Text editor
+sudo pacman -S  --noconfirm --needed geany
+sudo pacman -S  --noconfirm --needed code
+
+## Document Pdf 
+sudo pacman -S  --noconfirm --needed zathura
+sudo pacman -S  --noconfirm --needed zathura-pdf-poppler
+
+## Walppaper
 sudo pacman -S  --noconfirm --needed nitrogen
+sudo pacman -S  --noconfirm --needed feh
+
+## tray icons
+sudo pacman -S  --noconfirm --needed volumeicon
 sudo pacman -S  --noconfirm --needed gxkb
 sudo pacman -S  --noconfirm --needed cbatticon
-sudo pacman -S  --noconfirm --needed taglib 
-sudo pacman -S  --noconfirm --needed ffmpeg
-sudo pacman -S  --noconfirm --needed git
-sudo pacman -S  --noconfirm --needed rsync
-sudo pacman -S  --noconfirm --needed xterm
-sudo pacman -S  --noconfirm --needed acpi
-sudo pacman -S  --noconfirm --needed xdg-user-dirs
-sudo pacman -S --noconfirm --needed unace unrar zip unzip sharutils  uudeview  arj cabextract 
 
+## Comprission
+sudo pacman -S  --noconfirm --needed xarchiver
+sudo pacman -S  --noconfirm --needed unace unrar zip unzip sharutils  uudeview  arj cabextract 
+
+## display image in terminal
+sudo pacman -S  --noconfirm --needed w3m
+
+## command line x11 clipboard
+sudo pacman -S  --noconfirm --needed xclip
+
+## Graphic
+sudo pacman -S  --noconfirm --needed  gimp
+sudo pacman -S  --noconfirm --needed  inkscape
+sudo pacman -S  --noconfirm --needed  Viewnior
+sudo pacman -S  --noconfirm --needed  imagemagick
+sudo pacman -S  --noconfirm --needed  scrot
+
+## Notification
+sudo pacman -S  --noconfirm --needed  dunst
+
+## other
+sudo pacman -S  --noconfirm --needed  xdotool
+sudo pacman -S  --noconfirm --needed  gtk2-perl
+sudo pacman -S  --noconfirm --needed  conky
+sudo pacman -S  --noconfirm --needed  git
+sudo pacman -S  --noconfirm --needed  rsync
+sudo pacman -S  --noconfirm --needed  acpi
+sudo pacman -S  --noconfirm --needed  playerctl
+sudo pacman -S  --noconfirm --needed  xdg-user-dirs
+sudo pacman -S  --noconfirm --needed  zenity
+sudo pacman -S  --noconfirm --needed  lm_sensors
+sudo pacman -S  --noconfirm --needed  iw
+sudo pacman -S  --noconfirm --needed  sysstat
+sudo pacman -S  --noconfirm --needed  polkit-gnome
+sudo pacman -S  --noconfirm --needed  libqalculate
+sudo pacman -S  --noconfirm --needed  sqlitebrowser
+sudo pacman -S  --noconfirm --needed  easytag
+sudo pacman -S  --noconfirm --needed  firefox
+sudo pacman -S  --noconfirm --needed  htop
+sudo pacman -S  --noconfirm --needed  atool
+sudo pacman -S  --noconfirm --needed  xscreensaver
+sudo pacman -S  --noconfirm --needed  uget
+sudo pacman -S  --noconfirm --needed  gufw
+sudo pacman -S  --noconfirm --needed  gucharmap
+sudo pacman -S  --noconfirm --needed  neofetch
+
+
+# ranger_devicons-master
+# connman-gtk
+# twmn-git
+# nerd fonts
+# cli-visualizer
+# cava
 ###################################################################
 set_msg " Installing category Qt"
 ###################################################################
@@ -104,22 +174,56 @@ sudo pacman -S  --noconfirm --needed qt5-styleplugins
 ###################################################################
 set_msg " Installing category Themes"
 ###################################################################
-sudo pacman -S    --noconfirm --needed ttf-dejavu
-sudo pacman -S    --noconfirm --needed ttf-droid
-sudo pacman -S    --noconfirm --needed adapta-gtk-theme
-sudo pacman -S    --noconfirm --needed arc-gtk-theme
-sudo pacman -S    --noconfirm --needed papirus-icon-theme
 
-
+sudo pacman -S   --noconfirm --needed ttf-dejavu
+sudo pacman -S   --noconfirm --needed ttf-droid
+sudo pacman -S   --noconfirm --needed gtk-engine-murrine
+sudo pacman -S   --noconfirm --needed adapta-gtk-theme
+sudo pacman -S   --noconfirm --needed arc-gtk-theme
+sudo pacman -S   --noconfirm --needed papirus-icon-theme
+sudo pacman -S   --noconfirm --needed capitaine-cursors
 #&ur sierrabreeze-kwin-decoration
 
+###################################################################
+set_msg " Installing trizen"
+###################################################################
 
+curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/trizen.tar.gz
+
+tar xzvf ./trizen.tar.gz
+
+cd trizen
+
+makepkg -si
+
+###################################################################
+set_msg " Installing Aur Apps"
+###################################################################
+
+trizen cava
+trizen cli-visualizer
+#trizen twmn
+trizen connman-gtk
+trizen gtk3-nocsd
+export GTK_CSD=1
+trizen perl-linux-desktopfiles
+trizen tty-clock
+trizen pamac-aur
+
+#trizen ranger_devicons
+#trizen capitaine-cursors
+# compton-tryone-git    for blur
+# pipes.sh    !screen saver treminal
+# cmatrix     !terminal matrix
+# ncpamixer   !pavucontrol terminal
+# calcurse    !calendar todo
 ###################################################################
 set_msg " Installing category My Apps"
 ###################################################################
 
+
 ###################################################################
-set_msg " Installing category file-manager"
+set_msg " Installing  file-manager"
 ###################################################################
 cd elokab-file-manager
  makepkg -si
@@ -202,3 +306,5 @@ set_msg " User ...."
 ###################################################################
 
 xdg-user-dirs-update
+
+set_msg " Done ...."
