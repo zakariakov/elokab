@@ -56,9 +56,10 @@ sudo systemctl  enable lightdm.service -f
 sudo systemctl  set-default graphical.target
 
 ## Window Manager
-sudo pacman -S  --noconfirm --needed openbox
+#sudo pacman -S  --noconfirm --needed openbox
 sudo pacman -S  --noconfirm --needed i3-gaps py3status python-pyudev python-pydbus python-tzlocal
 sudo pacman -S  --noconfirm --needed lxappearance-obconf
+
 sudo pacman -S  --noconfirm --needed compton
 sudo pacman -S  --noconfirm --needed rofi
 
@@ -75,6 +76,7 @@ sudo pacman -S  --noconfirm --needed ffmpeg
 sudo pacman -S  --noconfirm --needed mplayer
 sudo pacman -S  --noconfirm --needed vlc
 sudo pacman -S  --noconfirm --needed pavucontrol-qt 
+sudo pacman -S  --noconfirm --needed  pulseaudio-equalizer
 sudo pacman -S  --noconfirm --needed taglib 
 
 ###################################################################
@@ -147,13 +149,16 @@ sudo pacman -S  --noconfirm --needed  easytag
 sudo pacman -S  --noconfirm --needed  firefox
 sudo pacman -S  --noconfirm --needed  htop
 sudo pacman -S  --noconfirm --needed  atool
-sudo pacman -S  --noconfirm --needed  xscreensaver
+#sudo pacman -S  --noconfirm --needed  xscreensaver
+sudo pacman -S  --noconfirm --needed  xautolock
+sudo pacman -S  --noconfirm --needed  i3lock
 sudo pacman -S  --noconfirm --needed  uget
 sudo pacman -S  --noconfirm --needed  gufw
 sudo pacman -S  --noconfirm --needed  gucharmap
 sudo pacman -S  --noconfirm --needed  neofetch
-
-
+sudo pacman -S  --noconfirm --needed  numlockx
+sudo pacman -S  --noconfirm --needed  most
+sudo export PAGER="most"
 # ranger_devicons-master
 # connman-gtk
 # twmn-git
@@ -202,14 +207,16 @@ set_msg " Installing Aur Apps"
 
 trizen cava
 trizen cli-visualizer
-#trizen twmn
+trizen obkey
 trizen connman-gtk
 trizen gtk3-nocsd
 export GTK_CSD=1
 trizen perl-linux-desktopfiles
 trizen tty-clock
 trizen pamac-aur
-
+trizen obmenu-generator
+trizen compton-tryone-git
+trizen openbox-patched
 #trizen ranger_devicons
 #trizen capitaine-cursors
 # compton-tryone-git    for blur
