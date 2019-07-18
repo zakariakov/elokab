@@ -1,0 +1,30 @@
+background no
+out_to_x no
+own_window no
+out_to_console yes
+ update_interval 3
+
+temperature_unit celsius
+
+TEXT
+
+<span style=>&nbsp; ${time %a %d %b %Y}  &nbsp;  ${time %H:%M:%S}&nbsp;</span>\
+<span style='color:xrdb.color15;'> &nbsp;   ${uptime_short}  &nbsp;</span> \
+	#---------------------------------------Battery---------------------------------------------------------------------------------------------------------------------------------
+	 ${if_match ${battery_percent BAT1} < 15}          <span style='\#FF0000;'> &nbsp;   ${battery BAT1} </span>\
+	${else}${if_match ${battery_percent BAT1} < 30} <span style='color:xrdb.color1;'> &nbsp;   ${battery BAT1} </span>\
+	${else}${if_match ${battery_percent BAT1} < 60} <span style='color:xrdb.color3;'> &nbsp;   ${battery BAT1} </span>\
+	${else}${if_match ${battery_percent BAT1} < 90} <span style='color:xrdb.color2'> &nbsp;   ${battery BAT1} </span>\
+	${else}  <span style='color:xrdb.foreground;'>   ${battery BAT1}  </span>${endif}${endif}${endif}${endif}\
+	#---------------------------------------Temperatur---------------------------------------------------------------------------------------------------------------------------------	
+	${if_match ${acpitemp} < 40}           <span style='color:xrdb.foreground;'> &nbsp;  ${acpitemp}  </span>\
+	${else}${if_match ${acpitemp} < 60} <span style='color:xrdb.color2;'> &nbsp;  ${acpitemp} </span>\
+	${else}${if_match ${acpitemp} < 70} <span style='color:xrdb.color3;'> &nbsp;  ${acpitemp} </span>\
+	${else}<span style='color:xrdb.color1;'> &nbsp;  ${acpitemp} </span>${endif}${endif}${endif} \
+	#---------------------------------------CPU ---------------------------------------------------------------------------------------------------------------------------------	
+	${if_match ${cpu cpu} < 20}           <span style='color:xrdb.color2;'>&nbsp;   ${cpu cpu}% &nbsp;</span> \
+	${else}${if_match ${cpu cpu} < 60} <span style='color:xrdb.color3;'> &nbsp;  ${cpu cpu}% &nbsp;</span> \
+	${else}<span style='ccolor:xrdb.color1;'> &nbsp;   ${cpu cpu}%  &nbsp; >/span> ${endif}${endif} \
+	#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	<span style='color:xrdb.color2;'> ${memperc}% &nbsp; </span>  \
+	<span style='color:xrdb.color15;'>    ${upspeedf wlp2s0}    ${downspeedf wlp2s0}</span>\

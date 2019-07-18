@@ -1,0 +1,18 @@
+background no
+out_to_x no
+own_window no
+out_to_console yes
+ update_interval 3
+
+temperature_unit celsius
+
+TEXT
+
+<span style=>&nbsp; ${time %a %d %b %Y}    ${time %H:%M:%S}&nbsp;</span>\
+<span style='color:xrdb.color5;'>    ${uptime_short}  </span> \
+<span style='color:xrdb.foreground;'>   ${battery BAT1}  </span>\
+<span style='color:xrdb.color2;'>   ${acpitemp}%     </span> \
+<span style='color:xrdb.color2;'>   ${memperc}%     </span> \
+<span style='color:\#FF8C00;'>   ${cpu cpu}%        </span> \
+<span style='color:xrdb.color15;'>     ${upspeedf wlp2s0}    ${downspeedf wlp2s0}   </span>\
+ 

@@ -1,14 +1,23 @@
 #!/bin/bash 
 # Zakaria Barkouk ( Zakaria.gatter@gmail.com)
+export LANG=en_US
+export LANGUAGE=en_US
 
 # Show CPU Info - 1 (Mpstat)
 _CPU_ () {
 
-    [ -z "$1" ] && icon="" || icon="$1"
+   # [ -z "$1" ] && icon="" || icon="$1"
+	#cpu_usage=$(mpstat | awk '{print $3}' );
+   # cpu_usage=$(mpstat -P ALL | awk '/all/{print $4}' | cut -d. -f1 );
+   cpu_usage=$(top -b -n2 -p 1 \
+   | fgrep "Cpu(s)" \
+   | tail -1 \
+   | awk -F'id,' -v prefix="$prefix" '{ split($1, vs, ","); \
+	   v=vs[length(vs)]; sub("%", "", v); \
+	   printf "%s%.1f%%\n", prefix, 100 - v }')
 
-    cpu_usage=$(mpstat -P ALL | awk '/all/{print $4}' | cut -d. -f1 );
     #echo "$icon $cpu_usage%"
-    echo "$cpu_usage%"
+    echo "$cpu_usage"
 }
 
 # Show Multi Cpu Info - 2 (Mpstat)
@@ -59,43 +68,44 @@ _BAT_ () {
     Bat=$(acpi | awk '{print $4}'| tr -d "%,");
     adapt=$(acpi -a | awk '{print $3}');
 
-    if [ "$adapt" = "on-line" ];then
-	icon0=""
-	icon1=""
-	icon2=""
-	icon3=""
-	icon4=""
-    else
-	icon0=""
-	icon1=""
-	icon2=""
-	icon3=""
-	icon4=""
-    fi
-
-   # [ -z "$Bat" ] && bat="$icon0 $adapt"
-    
-       #[ "$Bat" -lt "30" ] && bat="$icon0 $Bat %"
-       #[ "$Bat" -gt "30" ] && bat="$icon1 $Bat %"
-         #[ "$Bat" -gt "60" ] && bat="$icon2 $Bat %"
-            #[ "$Bat" -it "90" ] && bat="$icon3 $Bat %"
-        #[ "$Bat" -it "99" ] && bat="$icon4 Full"
-   bat="$icon4 $Bat"
-		if  [[ $Bat -ge 100 ]] ; then
-		 bat="$icon4  Full"
-		 elif [[ $Bat -ge 90 ]] && [[ $Bat -lt 100 ]]; then
-              bat="$icon4 $Bat%"
-        elif [[ $Bat -ge 80 ]] && [[ $Bat -lt 90 ]]; then
-              bat="$icon3 $Bat%"
-          elif [[ $Bat -ge 60 ]] && [[ $Bat -lt 80 ]]; then
-              bat="$icon2$Bat%"    
-          elif [[ $Bat -ge 30 ]] && [[ $Bat -lt 60 ]]; then
-              bat="$icon1$Bat%"    
-           else
-               bat="$icon0$Bat%"    
-          fi
+     if [ "$adapt" = "on-line" ];then
+	 icon0=""
+	 icon1=""
+	 icon2=""
+	 icon3=""
+	 icon4=""
+     else
+	 icon0=""
+	 icon1=""
+	 icon2=""
+	 icon3=""
+	 icon4=""
+     fi
  
-echo $bat
+	
+     
+        bat="$icon4 $Bat"
+		if  [[ $Bat -ge 100 ]] ; then
+			bat="$icon4  Full"
+		elif [[ $Bat -ge 80 ]] && [[ $Bat -lt 100 ]]; then
+            bat="$icon4 $Bat%"
+        elif [[ $Bat -ge 60 ]] && [[ $Bat -lt 80 ]]; then
+            bat="$icon3 $Bat%"
+        elif [[ $Bat -ge 40 ]] && [[ $Bat -lt 60 ]]; then
+            bat="$icon2$Bat%"    
+        elif [[ $Bat -ge 20 ]] && [[ $Bat -lt 40 ]]; then
+            bat="$icon1$Bat%"    
+        else	
+        
+            bat="$icon0$Bat%"    
+        fi
+ 
+	#if [ "$adapt" = "on-line" ];then
+	 #icon=""
+	 #else
+	 #icon=""
+     #fi
+	echo "$bat"
 
 }
 
@@ -156,16 +166,22 @@ echo  "$icon $SIZE"
 _WINDOW_ () {
 
     [ -z "$1" ] && icon="" || icon="$1"
-    [ -z "$2" ] && CAR="30" || CAR="$2"
+    [ -z "$2" ] && CAR="150" || CAR="$2"
 
     focus=$(xdotool getactivewindow getwindowname)
     focus_Number=$(xdotool getactivewindow getwindowname | wc -c)
     Focus_N=$(xdotool getactivewindow getwindowname | head -c $CAR )
 
+#if [ -z "$focus" ];then
+        #echo "$icon Welcome"
+ #else
+    #[ "$focus_Number" -gt "$CAR" ] && echo "$icon $Focus_N ..." || echo "$icon $focus"
+#fi
+
 if [ -z "$focus" ];then
-        echo "$icon Welcome"
+        echo "Welcome"
  else
-    [ "$focus_Number" -gt "$CAR" ] && echo "$icon $Focus_N ..." || echo "$icon $focus"
+    [ "$focus_Number" -gt " $CAR" ] && echo " $Focus_N ..." || echo " $focus"
 fi
 }
 
@@ -188,35 +204,32 @@ else
 fi
 }
 
-#Show mpd Playing song and status - 14 (mpd; ncmpccp, mpc)
-_MPD_ () {
+#Show mpris Playing song and status - 14 (mpris; mpris-ctl)
+_MPRIS_ () {
+
 
     [ -z "$1" ] && icon="" || icon="$1"
 
-icon1= 
-icon2=
-NCMP=$(mpc status | awk '/^\[playing\]/{print $1}')
-_NCMP=$(mpc | head -1 )
+icon1=""
+icon2=""
+# NCMP=$(mpc status | awk '/^\[playing\]/{print $1}')
+# _NCMP=$(mpc | head -1 )
 
-if [ "$NCMP" = "[playing]" ];then 
+# if [ "$NCMP" = "[playing]" ];then 
+#     echo "$icon2"
+# else
+#     echo "$icon1"
+# fi
+#NCMP=$(playerctl -p goldfinch status)
+NCMP=$(playerctl  status)
+#echo $NCMP
+if [ "$NCMP" == "Playing" ];then 
     echo "$icon2"
+elif [ "$NCMP" == "Paused" ];then	
+	 echo "$icon1"
 else
-    echo "$icon1"
+    echo  ""
 fi
-
-#PATTERN="playing"
-#FILE=/tmp/mpctest
-
-#mpc status > $FILE
-
-#if grep -q $PATTERN $FILE;
- #then
-    
-    #echo "  $(mpc current)"
- #else
-   
-    #echo ""
-#fi
 
 }
 
@@ -228,12 +241,12 @@ _TEMP_ () {
 	temp=$(sensors | awk '/^temp1/{print $2}' | tr -d "+°C"  | cut -d. -f1 )
 
 echo " $temp °C"
-   if [ "$temp" -gt "65" ];then
-   echo "<span style=' color:#ff0000;'> </span> $temp °C"
-   elif [ "$temp" -gt "45" ];then
-    echo "<span style=' color:#4CDB48;'>   </span> $temp °C"
+   if [ "$temp" -gt "90" ];then
+   echo "<span style=' color:#FF0000;'>&nbsp;  $temp °C </span> "
+   elif [ "$temp" -gt "70" ];then
+    echo " <span style=' color:#FF4D00;'>&nbsp;   $temp °C </span>"
    elif [ "$temp" -gt "30" ];then
-   echo "  $temp °C"
+   echo "  $temp °C "
    fi
 
 }
@@ -278,6 +291,7 @@ else
     elif [ "$Vol" -eq "0" ];then 
         echo -e " $Vol%"
     fi 
+   # echo -e "$Vol%"
 fi
 }
 
@@ -295,12 +309,83 @@ _WIFI_ () {
     #[ "$W_C" == "connected" ] && echo -n "$icon $W_IP ($W_N) " || echo -n "$icon --- "
 
 #done
-QUALITY=$(iw dev $1 link | grep SSID | cut -d " " -f 2-)
-if  [  -z $QUALITY ]
-then
-  echo  ""
+#QUALITY=$(iw dev $1 link | grep SSID | cut -d " " -f 2-)
+#if  [  -z $QUALITY ]
+#then
+  #echo  ""
+#else
+  #echo   $QUALITY  # short text
+#fi
+
+if [[ -n $BLOCK_INSTANCE ]]; then
+  INTERFACE=$BLOCK_INSTANCE
 else
-  echo   $QUALITY  # short text
+  INTERFACE=$(ip route | awk '/^default/ { print $5 ; exit }')
+fi
+
+# Issue #36 compliant.
+if ! [ -e "/sys/class/net/${INTERFACE}/operstate" ] || ! [ "`cat /sys/class/net/${INTERFACE}/operstate`" = "up" ]
+then
+   # echo "$INTERFACE "
+    echo "<span style=' color:#686869;'> $INTERFACE </span>"
+    exit 0
+fi
+
+# path to store the old results in
+path="/dev/shm/$(basename $0)-${INTERFACE}"
+
+# grabbing data for each adapter.
+read rx < "/sys/class/net/${INTERFACE}/statistics/rx_bytes"
+read tx < "/sys/class/net/${INTERFACE}/statistics/tx_bytes"
+
+# get time
+time=$(date +%s)
+
+# write current data if file does not exist. Do not exit, this will cause
+# problems if this file is sourced instead of executed as another process.
+if ! [[ -f "${path}" ]]; then
+  echo "${time} ${rx} ${tx}" > "${path}"
+  chmod 0666 "${path}"
+fi
+
+# read previous state and update data storage
+read old < "${path}"
+echo "${time} ${rx} ${tx}" > "${path}"
+
+# parse old data and calc time passed
+old=(${old//;/ })
+time_diff=$(( $time - ${old[0]} ))
+
+# sanity check: has a positive amount of time passed
+[[ "${time_diff}" -gt 0 ]] || exit
+
+# calc bytes transferred, and their rate in byte/s
+rx_diff=$(( $rx - ${old[1]} ))
+tx_diff=$(( $tx - ${old[2]} ))
+rx_rate=$(( $rx_diff / $time_diff ))
+tx_rate=$(( $tx_diff / $time_diff ))
+
+# shift by 10 bytes to get KiB/s. If the value is larger than
+# 1024^2 = 1048576, then display MiB/s instead
+#echo -n " "
+# incoming
+echo -n "⬇"
+rx_kib=$(( $rx_rate >> 10 ))
+if [[ "$rx_rate" -gt 1048576 ]]; then
+  printf '%sM' "`echo "scale=1; $rx_kib / 1024" | bc`"
+else
+  echo -n "${rx_kib}K"
+fi
+
+echo -n " "
+
+# outgoing
+echo -n "⬆"
+tx_kib=$(( $tx_rate >> 10 ))
+if [[ "$tx_rate" -gt 1048576 ]]; then
+  printf '%sM' "`echo "scale=1; $tx_kib / 1024" | bc`"
+else
+  echo -n "${tx_kib}K"
 fi
 
 }
@@ -433,16 +518,14 @@ _XBACKLIGHT_ () {
 #echo "$icon $MP"
 	
 XBACKLIGHT=$(xbacklight -get |  cut -d "." -f 1) 
-	#if [[ "$XBACKLIGHT" -gt "70" ]] && [[ $Bat -lt 100 ]];then
-        #echo " $XBACKLIGHT %"
-    #elif [[ "$XBACKLIGHT" -gt "60" ]] && [[ $Bat -lt 70 ]];then
-        #echo  " $XBACKLIGHT %"
-    #elif  [[ "$XBACKLIGHT" -gt "30" ]] && [[ $Bat -lt 60 ]];then
-        #echo  " $XBACKLIGHT %"
-    #else
-        #echo  " $XBACKLIGHT%"
-    #fi 
-printf "%.f%%" $XBACKLIGHT
+	if [[ "$XBACKLIGHT" -gt "60" ]] && [[ $Bat -lt 100 ]];then
+        echo " $XBACKLIGHT %"
+   elif  [[ "$XBACKLIGHT" -gt "30" ]] && [[ $Bat -lt 60 ]];then
+        echo  " $XBACKLIGHT %"
+    else
+        echo  " $XBACKLIGHT%"
+    fi 
+#printf "%.f%%" $XBACKLIGHT
 
 }
 
@@ -493,7 +576,7 @@ $0 : Simple script Collaction for i3blocks
 		-  Show Mocp playing song and status * Deps : (moc)
 		    usage : $0 13 \"\$ICON\"
 	    (14) :
-		-  Show mpd Playing song and status * Deps : (mpd; ncmpccp, mpc)
+		-  Show mpris Playing song and status * Deps : (mpris; mpris-ctl)
 		    usage : $0 14 \"\$ICON\"
 	    (15) :
 		-  Show Cpu Temp * Deps : (xsenser)
@@ -607,7 +690,7 @@ case $1 in
 	;;
     14 )
 	[ "$#" -gt "2" ] && {echo " $0 : To many Argument " && return 0 }
-	    _MPD_ "$2"
+	    _MPRIS_ "$2"
 	;;
     15 )
 	[ "$#" -gt "2" ] && {echo " $0 : To many Argument " && return 0 }
