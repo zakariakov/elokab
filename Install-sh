@@ -56,11 +56,11 @@ sudo systemctl  enable lightdm.service -f
 sudo systemctl  set-default graphical.target
 
 ## Window Manager
-#sudo pacman -S  --noconfirm --needed openbox
+#sudo pacman -S  --noconfirm --needed openbox    !!! Replace by openbox-patched
 sudo pacman -S  --noconfirm --needed i3-gaps py3status python-pyudev python-pydbus python-tzlocal
 sudo pacman -S  --noconfirm --needed lxappearance-obconf
 
-sudo pacman -S  --noconfirm --needed compton
+#sudo pacman -S  --noconfirm --needed compton    !!! Replace by compton-tryone-git
 sudo pacman -S  --noconfirm --needed rofi
 
 ###################################################################
@@ -149,12 +149,13 @@ sudo pacman -S  --noconfirm --needed  easytag
 sudo pacman -S  --noconfirm --needed  firefox
 sudo pacman -S  --noconfirm --needed  htop
 sudo pacman -S  --noconfirm --needed  atool
-#sudo pacman -S  --noconfirm --needed  xscreensaver
+sudo pacman -S  --noconfirm --needed  xscreensaver
 sudo pacman -S  --noconfirm --needed  xautolock
 sudo pacman -S  --noconfirm --needed  i3lock
 sudo pacman -S  --noconfirm --needed  uget
 sudo pacman -S  --noconfirm --needed  gufw
 sudo pacman -S  --noconfirm --needed  gucharmap
+sudo pacman -S  --noconfirm --needed  gnome-font-viewer
 sudo pacman -S  --noconfirm --needed  neofetch
 sudo pacman -S  --noconfirm --needed  numlockx
 sudo pacman -S  --noconfirm --needed  most
@@ -222,8 +223,13 @@ trizen openbox-patched
 # compton-tryone-git    for blur
 # pipes.sh    !screen saver treminal
 # cmatrix     !terminal matrix
+# unimatrix-git   !terminal matrix
 # ncpamixer   !pavucontrol terminal
 # calcurse    !calendar todo
+# bspwm-patched
+# sxhkd
+# gotop
+# micro-bin
 ###################################################################
 set_msg " Installing category My Apps"
 ###################################################################
